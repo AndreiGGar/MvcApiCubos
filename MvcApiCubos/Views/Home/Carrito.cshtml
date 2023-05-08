@@ -1,0 +1,100 @@
+﻿@model IEnumerable<MvcApiCubos.Models.Cubo>
+
+@{
+    ViewData["Title"] = "Carrito";
+}
+
+<h4>Carrito</h4>
+
+@if (Model == null)
+{
+    <h4>@ViewData["MESSAGE"]</h4>
+}
+else
+{
+    @if (Model.Count() != 0)
+    {
+        <a class="btn btn-dark mb-4" asp-action="Compra">
+            Realizar pedido
+        </a>
+        <table class="table table-bordered table-active table-hover">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IdCubo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Nombre)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Marca)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Imagen)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Precio)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IdCubo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Marca)
+                        </td>
+                        <td>
+                            <img src="~/assets/images/cubos/@item.Imagen" onerror="this.onerror=null; this.src='@item.Imagen'" style="width: 150px; height: 150px;" />
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Precio)
+                        </td>
+                        <td>
+                            <a class="btn btn-danger" asp-action="Carrito" asp-route-idcubo="@item.IdCubo">
+                                Borrar
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    } else
+    {
+        <table class="table table-bordered table-active table-hover">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IdCubo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Nombre)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Marca)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Imagen)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Precio)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                    <tr>
+                        <td colspan="5">
+                            No hay productos en el carrito
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+    }
+}

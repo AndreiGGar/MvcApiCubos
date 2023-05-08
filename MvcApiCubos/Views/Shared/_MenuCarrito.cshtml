@@ -1,0 +1,33 @@
+﻿@{
+    int numcubos = 0;
+
+    if (Context.Session.GetObject<List<int>>("CART") != null)
+    {
+        numcubos = Context.Session.GetObject<List<int>>("CART").Count();
+    }
+}
+
+@if (Context.Session.GetString("CART") != null)
+{
+    <li class="nav-item">
+        <a class="btn btn-primary"
+       asp-controller="Home"
+       asp-action="Carrito">
+            <span>
+                Carrito <span class="badge bg-dark text-white">@numcubos</span>
+            </span>
+        </a>
+    </li>
+}
+else
+{
+    <li class="nav-item">
+        <a class="btn btn-primary"
+       asp-controller="Home"
+       asp-action="Carrito">
+            <span>
+                Carrito <span class="badge bg-dark text-white">0</span>
+            </span>
+        </a>
+    </li>
+}
